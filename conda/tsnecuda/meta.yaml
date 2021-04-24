@@ -31,6 +31,7 @@ outputs:
         - python {{ python }}
         - libxml2
       host:
+        - conda
         - cmake
         - setuptools
         - mkl-devel >=2018
