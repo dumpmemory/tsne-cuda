@@ -30,9 +30,9 @@ outputs:
         - git
         - python {{ python }}
         - libxml2
+      host:
         - cmake
         - setuptools
-      host:
         - mkl-devel >=2018
         - blas =*=mkl
         - cudatoolkit-dev {{ cudatoolkit }}
