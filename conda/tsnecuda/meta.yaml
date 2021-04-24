@@ -26,17 +26,18 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - cudatoolkit-dev {{ cudatoolkit }}
+        - {{ compiler('cuda') }}
         - make
         - git
         - python {{ python }}
         - libxml2
       host:
         - conda
-        - cmake
+        - cmake >=3.20
         - setuptools
         - mkl-devel >=2018
         - blas =*=mkl
+        - cudatoolkit-dev {{ cudatoolkit }}
         - cudatoolkit {{ cudatoolkit }}
         - faiss-gpu ==1.6.5
         - python {{ python }}
