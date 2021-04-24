@@ -9,3 +9,6 @@ set -x
 CMAKE_PLATFORM_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE="${RECIPE_DIR}/cross-linux.cmake")
 cmake -B _build . -DCMAKE_INSTALL_PREFIX=${PREFIX} ${CMAKE_PLATFORM_FLAGS[@]}
 make -C _build -j $CPU_COUNT
+
+cd $SRC_DIR/_build/python/
+$PYTHON setup.py install --single-version-externally-managed --record=record.txt --prefix=$PREFIX
