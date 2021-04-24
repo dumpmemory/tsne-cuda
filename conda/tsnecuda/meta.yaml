@@ -16,47 +16,38 @@ source:
 
 build:
     number: {{ number }}
-    noarch_python: True
 
 outputs:
   - name: tsnecuda
     script: build.sh
     build:
       string: "h{{ PKG_HASH }}_{{ number }}_cuda{{ cudatoolkit }}"
-      run_exports:
-        - {{ pin_compatible('tsnecuda', exact=True) }}
     requirements:
       build:
         - {{ compiler('cxx') }}
         - make
         - git
-        - python
+        - python {{ python }}
         - libxml2
-      host:
-        - conda
-        - cmake >=3.20
+        - cmake
         - setuptools
+      host:
         - mkl-devel >=2018
         - blas =*=mkl
+        - cudatoolkit-dev {{ cudatoolkit }}
         - cudatoolkit {{ cudatoolkit }}
         - faiss-gpu ==1.6.5
-        - python
-        - numpy >=1.14
+        - python {{ python }}
         - gflags
         - gtest
         - gmock
-        - libxml2
       run:
         - mkl >=2018
         - blas =*=mkl
         - faiss-gpu ==1.6.5
-        - {{ pin_compatible('python', min_pin='3.6') }}
+        - numpy >=1.14
+        - {{ pin_compatible('python') }}
         - {{ pin_compatible('cudatoolkit', max_pin='x.x') }}
-        - {{ pin_compatible('numpy') }}
-        - {{ pin_compatible('gflags') }}
-        - {{ pin_compatible('gtest') }}
-        - {{ pin_compatible('gmock') }}
-        - {{ pin_compatible('libxml2') }}
     test:
       imports:
         - tsnecuda
