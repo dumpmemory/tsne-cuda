@@ -23,28 +23,20 @@ outputs:
       string: "h{{ PKG_HASH }}_{{ number }}_cuda{{ cudatoolkit }}"
     requirements:
       build:
-        - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - make
-        - git
-        - python {{ python }}
-        - libxml2
+        - libxml2 # Note: This is a weird bug with cudatoolkit-dev, where if libxml2 isn't present in the build
+                  # environment, it won't post-link correctly in the host environment.
       host:
-        - conda
+        - python {{ python }}
         - cmake >=3.20
-        - setuptools
         - mkl-devel >=2018
         - blas =*=mkl
         - cudatoolkit-dev {{ cudatoolkit }}
         - cudatoolkit {{ cudatoolkit }}
         - faiss-gpu ==1.6.5
-        - python {{ python }}
         - gflags
         - gtest
         - gmock
-        - glib
-        - libgcc-ng
-        - libstdcxx-ng
       run:
         - mkl >=2018
         - blas =*=mkl
