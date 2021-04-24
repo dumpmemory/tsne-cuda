@@ -26,7 +26,6 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - {{ compiler('cuda') }}
         - make
         - git
         - python {{ python }}
