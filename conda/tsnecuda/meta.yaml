@@ -21,7 +21,7 @@ outputs:
   - name: tsnecuda
     build:
       string: "h{{ PKG_HASH }}_{{ number }}_cuda{{ cudatoolkit }}"
-      script: build.sh
+      script: build-pkg.sh
       activate_in_script: True
     requirements:
       build:
