@@ -19,9 +19,10 @@ build:
 
 outputs:
   - name: tsnecuda
-    script: build.sh
     build:
       string: "h{{ PKG_HASH }}_{{ number }}_cuda{{ cudatoolkit }}"
+      script: build.sh
+      activate_in_script: True
     requirements:
       build:
         - {{ compiler('cxx') }}
