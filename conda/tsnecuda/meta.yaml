@@ -21,11 +21,12 @@ outputs:
   - name: tsnecuda
     build:
       string: "h{{ PKG_HASH }}_{{ number }}_cuda{{ cudatoolkit }}"
-      script: build-pkg.sh
-      activate_in_script: True
+      script: install-lib.sh
     requirements:
       build:
+        - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - cudatoolkit-dev {{ cudatoolkit }}
         - make
         - git
         - python {{ python }}
@@ -36,13 +37,15 @@ outputs:
         - setuptools
         - mkl-devel >=2018
         - blas =*=mkl
-        - cudatoolkit-dev {{ cudatoolkit }}
         - cudatoolkit {{ cudatoolkit }}
         - faiss-gpu ==1.6.5
         - python {{ python }}
         - gflags
         - gtest
         - gmock
+        - glib
+        - libgcc-ng
+        - libstdcxx-ng
       run:
         - mkl >=2018
         - blas =*=mkl
