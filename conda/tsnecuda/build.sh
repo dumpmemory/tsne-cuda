@@ -11,4 +11,7 @@ cmake -B _build . -DCMAKE_INSTALL_PREFIX=${PREFIX} ${CMAKE_PLATFORM_FLAGS[@]}
 make -C _build -j $CPU_COUNT
 
 cd $SRC_DIR/_build/python/
-$PYTHON setup.py install --single-version-externally-managed --record=record.txt --prefix=$PREFIX
+which python
+echo $python
+env
+python setup.py install --single-version-externally-managed --record=record.txt --prefix=$PREFIX
